@@ -10,6 +10,7 @@ motor_pin = 18
 
 GPIO.setup(motor_pin, GPIO.OUT)
 motor_pwm = GPIO.PWM(motor_pin, 500)
+motor_pwm.start(0)
 
 try:         
     while True:
