@@ -1,8 +1,8 @@
 
 const int in1Pin = 10;
 const int in2Pin = 9;
-const int in3Pin = 8;
-const int in4Pin = 11;
+const int in3Pin = 11;
+const int in4Pin = 8;
 
 int period = 20;
 
@@ -53,7 +53,7 @@ void singleStepForward(int period) {
 }
 
 void stepReverse(int steps, int period) {
-  for (int i = 0; i < steps; i++) {
+  for (int i = 0; i < steps; i++) {200
     singleStepReverse(period);
   }
 }
