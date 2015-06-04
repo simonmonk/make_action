@@ -1,4 +1,4 @@
-#ex_02_pwm_motor_control.py
+#ex_04_full_motor_control.py
 
 import RPi.GPIO as GPIO
 import time
