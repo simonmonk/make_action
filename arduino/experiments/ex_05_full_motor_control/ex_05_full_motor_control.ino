@@ -7,7 +7,7 @@ void setup() {
   pinMode(in1Pin, OUTPUT);
   pinMode(in2Pin, OUTPUT);
   Serial.begin(9600);
-  Serial.println("Enter s (stop) of f or r followed by Duty Cycle (0 to 255). E.g. f120");
+  Serial.println("Enter s (stop) or f or r followed by Duty Cycle (0 to 255). E.g. f120");
 }
 
 void loop() {

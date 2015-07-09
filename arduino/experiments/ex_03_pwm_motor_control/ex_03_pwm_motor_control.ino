@@ -1,5 +1,3 @@
-// Experiment 2. PWM Motor Control
-
 const int motorPin = 9;
 
 void setup() {
