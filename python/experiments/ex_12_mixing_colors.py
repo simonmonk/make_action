@@ -1,21 +1,15 @@
-# 03_rgb.py
-# From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
-# Based on Recipe 9.9 in The Raspberry Pi Cookbook by Simon Monk.
-
-from Tkinter import *       # tkinter provides the graphical user interface (GUI)
+from Tkinter import *       
 import RPi.GPIO as GPIO
 import time
 
-# Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
-GPIO.setmode(GPIO.BCM)
+
+GPIO.setmode(GPIO.BCM)  # (1)
 GPIO.setup(18, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 
-# Start Pulse Width Modulation (PWM) on the red, green and blue channels to 
-# control the brightness of the LEDs.
-# Follow this link for more info on PWM: http://en.wikipedia.org/wiki/Pulse-width_modulation
-pwmRed = GPIO.PWM(18, 500)
+
+pwmRed = GPIO.PWM(18, 500) # (2)
 pwmRed.start(100)
 
 pwmGreen = GPIO.PWM(23, 500)
@@ -24,25 +18,17 @@ pwmGreen.start(100)
 pwmBlue = GPIO.PWM(24, 500)
 pwmBlue.start(100)
 
-
-# group together all of the GUI code into a class called App
 class App:
     
-    # this function gets called when the app is created
-    def __init__(self, master):
-        # A frame holds the various GUI controls
-        frame = Frame(master)
+    def __init__(self, master): #(3)
+        frame = Frame(master)  #(4)
         frame.pack()
         
-        # Create the labels and position them in a grid layout
-        Label(frame, text='Red').grid(row=0, column=0)
+        Label(frame, text='Red').grid(row=0, column=0) # (5)
         Label(frame, text='Green').grid(row=1, column=0)
         Label(frame, text='Blue').grid(row=2, column=0)
         
-        # Create the sliders and position them in a grid layout
-        # the 'command' attribute specifys a method to call when
-        # a slider is moved
-        scaleRed = Scale(frame, from_=0, to=100,
+        scaleRed = Scale(frame, from_=0, to=100,     # (6)
               orient=HORIZONTAL, command=self.updateRed)
         scaleRed.grid(row=0, column=1)
         scaleGreen = Scale(frame, from_=0, to=100,
@@ -52,8 +38,7 @@ class App:
               orient=HORIZONTAL, command=self.updateBlue)
         scaleBlue.grid(row=2, column=1)
 
-    # These methods called whenever a slider moves
-    def updateRed(self, duty):
+    def updateRed(self, duty):     # (7)
         # change the led brightness to match the slider
         pwmRed.ChangeDutyCycle(float(duty))
 
@@ -63,8 +48,8 @@ class App:
     def updateBlue(self, duty):
         pwmBlue.ChangeDutyCycle(float(duty))
 
-# Set the GUI running, give the window a title, size and position
-root = Tk()
+
+root = Tk()  # (8)
 root.wm_title('RGB LED Control')
 app = App(root)
 root.geometry("200x150+0+0")
