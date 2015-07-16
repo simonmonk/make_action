@@ -1,25 +1,25 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-const int tempPin = 2;
+const int tempPin = 2;     // (1)
 const int heatPin = 9;
-const long period = 1000; 
+const long period = 1000;  // (2)
 
-OneWire oneWire(tempPin);
+OneWire oneWire(tempPin);  // (3)
 DallasTemperature sensors(&oneWire);
 
-float setTemp = 0.0;
+float setTemp = 0.0;       // (4)
 long lastSampleTime = 0;
 
-void setup() {
+void setup() {  
   pinMode(heatPin, OUTPUT);
   Serial.begin(9600);
   Serial.println("t30 - sets the temperature to 30");
-  sensors.begin();
+  sensors.begin();        // (5)
 }
 
 void loop() { 
-  if (Serial.available()) {
+  if (Serial.available()) {     // (6)
     char command = Serial.read();
     if (command == 't') {
       setTemp = Serial.parseInt();
@@ -27,15 +27,15 @@ void loop() {
       Serial.println(setTemp);
     }
   }
-  long now = millis();
+  long now = millis();         // (7)
   if (now > lastSampleTime + period) {
     lastSampleTime = now;
-    float measuredTemp = readTemp();
+    float measuredTemp = readTemp();    // (8)
     float error = setTemp - measuredTemp;
     Serial.print(measuredTemp);
     Serial.print(", ");
     Serial.print(setTemp);
-    if (error > 0) {
+    if (error > 0) {                    // (9)
         digitalWrite(heatPin, HIGH);
         Serial.println(", 1");
     }
@@ -46,7 +46,7 @@ void loop() {
   }
 }
 
-float readTemp() {
+float readTemp() {     // (10)
   sensors.requestTemperatures(); 
   return sensors.getTempCByIndex(0);  
 }

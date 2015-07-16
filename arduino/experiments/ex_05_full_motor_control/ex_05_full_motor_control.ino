@@ -1,8 +1,8 @@
-const int enablePin = 11;
+const int enablePin = 11;  // (1)
 const int in1Pin = 10;
 const int in2Pin = 9;
 
-void setup() {
+void setup() {                 // (2)
   pinMode(enablePin, OUTPUT);
   pinMode(in1Pin, OUTPUT);
   pinMode(in2Pin, OUTPUT);
@@ -10,15 +10,15 @@ void setup() {
   Serial.println("Enter s (stop) or f or r followed by Duty Cycle (0 to 255). E.g. f120");
 }
 
-void loop() {
+void loop() {                         // (3)
   if (Serial.available()) {
-    char direction = Serial.read();
-    if (direction == 's') {
-      stop();
+    char direction = Serial.read();   // (4)
+    if (direction == 's') {           // (5)
+      stop();                         // (6)
       return;
     }
-    int pwm = Serial.parseInt();
-    if (direction == 'f') {
+    int pwm = Serial.parseInt();      // (7)
+    if (direction == 'f') {           // (8)
       forward(pwm);
     }
     else if (direction == 'r') {
@@ -27,7 +27,7 @@ void loop() {
   }
 }
 
-void forward(int pwm)
+void forward(int pwm)          // (9)
 {
   digitalWrite(in1Pin, HIGH);
   digitalWrite(in2Pin, LOW);
@@ -36,7 +36,7 @@ void forward(int pwm)
   Serial.println(pwm);
 }
 
-void reverse(int pwm)
+void reverse(int pwm)          // (10)
 {
   digitalWrite(in1Pin, LOW);
   digitalWrite(in2Pin, HIGH);
@@ -45,7 +45,7 @@ void reverse(int pwm)
   Serial.println(pwm);
 }
 
-void stop()
+void stop()                    // (11)
 {
   digitalWrite(in1Pin, LOW);
   digitalWrite(in2Pin, LOW);

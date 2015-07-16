@@ -1,14 +1,13 @@
-// Experiment 1. Basic Motor Control
 
-const int motorPin = 9;
+const int controlPin = 9;
 
-void setup() {
-  pinMode(motorPin, OUTPUT);
+void setup() { 
+  pinMode(controlPin, OUTPUT);
 }
 
-void loop() {
-  digitalWrite(motorPin, LOW);
+void loop() { 
+  digitalWrite(controlPin, LOW);   // (1)
   delay(5000);
-  digitalWrite(motorPin, HIGH);
+  digitalWrite(controlPin, HIGH);
   delay(2000);
 }

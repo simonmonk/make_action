@@ -15,7 +15,7 @@ GPIO.setup(ms2_pin, GPIO.OUT)
 
 period = 0.02
 
-def step(steps, direction, period):  
+def step(steps, direction, period):  # (1)
   GPIO.output(dir_pin, direction)  
   for i in range(0, steps):
     GPIO.output(step_pin, True)
@@ -23,8 +23,8 @@ def step(steps, direction, period):
     GPIO.output(step_pin, False)
     time.sleep(period)
 
-def step_mode(mode):
-    GPIO.output(ms1_pin, mode & 1)
+def step_mode(mode):                 # (2)
+    GPIO.output(ms1_pin, mode & 1)   # (3)
     GPIO.output(ms2_pin, mode & 2)
 
 try:
@@ -34,7 +34,7 @@ try:
     print('f100 - forward 100 steps');
     print('r100 - reverse 100 steps');
     
-    while True:
+    while True:                       # (4)
         command = raw_input('Enter command: ')
         parameter_str = command[1:] # from char 1 to end
         parameter = int(parameter_str)

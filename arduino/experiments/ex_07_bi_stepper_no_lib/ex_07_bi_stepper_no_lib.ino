@@ -1,12 +1,12 @@
 
-const int in1Pin = 10;
+const int in1Pin = 10;   // (1)
 const int in2Pin = 9;
 const int in3Pin = 11;
 const int in4Pin = 8;
 
-int period = 20;
+int period = 20;      // (2)
 
-void setup() {
+void setup() {        // (3)
   pinMode(in1Pin, OUTPUT);
   pinMode(in2Pin, OUTPUT);
   pinMode(in3Pin, OUTPUT);
@@ -18,14 +18,14 @@ void setup() {
   Serial.println("r100 - reverse 100 steps");
 }
 
-void loop() {
+void loop() {      // (4)
   if (Serial.available()) {
     char command = Serial.read();
     int param = Serial.parseInt();
-    if (command == 'p') {
+    if (command == 'p') {        // (5)
       period = param;
     }
-    else if (command == 'f') {
+    else if (command == 'f') {   // (6)
       stepForward(param, period);
     }
     else if (command == 'r') {
@@ -35,13 +35,13 @@ void loop() {
   setCoils(0, 0, 0, 0); // power down
 }
 
-void stepForward(int steps, int period) {
+void stepForward(int steps, int period) {     // (7)
   for (int i = 0; i < steps; i++) {
     singleStepForward(period);
   }
 }
 
-void singleStepForward(int period) {
+void singleStepForward(int period) {       // (8)
   setCoils(1, 0, 0, 1);
   delay(period);
   setCoils(1, 0, 1, 0);
@@ -58,7 +58,7 @@ void stepReverse(int steps, int period) {
   }
 }
 
-void singleStepReverse(int period) {
+void singleStepReverse(int period) {          // (9)
   setCoils(0, 1, 0, 1);
   delay(period);
   setCoils(0, 1, 1, 0);
@@ -69,7 +69,7 @@ void singleStepReverse(int period) {
   delay(period);
 }
 
-void setCoils(int in1, int in2, int in3, int in4) {
+void setCoils(int in1, int in2, int in3, int in4) {    // (10)
   digitalWrite(in1Pin, in1);
   digitalWrite(in2Pin, in2);
   digitalWrite(in3Pin, in3);
